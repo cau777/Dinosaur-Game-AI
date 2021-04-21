@@ -1,0 +1,122 @@
+#pragma kernel CSMain
+
+RWStructuredBuffer<float> Inputs;
+RWStructuredBuffer<float> Weights;
+RWStructuredBuffer<float> Bias;
+RWStructuredBuffer<uint> Results;
+
+uint BiasCount;
+uint WeightsCount;
+
+// Inputs
+// GameSpeed
+// ObstacleDistance
+// ObstacleHeight
+// ObstacleWidth
+// ObstacleY
+// ObstacleGap
+// DinoY
+
+// Hidden Layers
+// 6
+// 4
+
+// Outputs
+// Jump
+// Duck
+// Walk
+
+float activation(float x)
+{
+    return 1.0 / (1 + exp(-x));
+}
+
+[numthreads(64,1,1)]
+void CSMain(uint id : SV_DispatchThreadID)
+{
+    //Generated Code
+    //Works almost twice as fast compared to dynamic code (with for loops)
+    
+    const uint bias_start = BiasCount * id;
+    const uint weights_start = WeightsCount * id;
+    const uint inputs_start = 7 * id;
+
+    const float temp_neuron00 = Inputs[inputs_start + 0] + Bias[bias_start + 0];
+    const float temp_neuron01 = Inputs[inputs_start + 1] + Bias[bias_start + 1];
+    const float temp_neuron02 = Inputs[inputs_start + 2] + Bias[bias_start + 2];
+    const float temp_neuron03 = Inputs[inputs_start + 3] + Bias[bias_start + 3];
+    const float temp_neuron04 = Inputs[inputs_start + 4] + Bias[bias_start + 4];
+    const float temp_neuron05 = Inputs[inputs_start + 5] + Bias[bias_start + 5];
+    const float temp_neuron06 = Inputs[inputs_start + 6] + Bias[bias_start + 6];
+    const float temp_neuron10 = activation(
+        Bias[bias_start + 7] + temp_neuron00 * Weights[weights_start + 0] + temp_neuron01 * Weights[weights_start + 1] +
+        temp_neuron02 * Weights[weights_start + 2] + temp_neuron03 * Weights[weights_start + 3] + temp_neuron04 *
+        Weights[weights_start + 4] + temp_neuron05 * Weights[weights_start + 5] + temp_neuron06 * Weights[weights_start
+            + 6]);
+    const float temp_neuron11 = activation(
+        Bias[bias_start + 8] + temp_neuron00 * Weights[weights_start + 7] + temp_neuron01 * Weights[weights_start + 8] +
+        temp_neuron02 * Weights[weights_start + 9] + temp_neuron03 * Weights[weights_start + 10] + temp_neuron04 *
+        Weights[weights_start + 11] + temp_neuron05 * Weights[weights_start + 12] + temp_neuron06 * Weights[
+            weights_start + 13]);
+    const float temp_neuron12 = activation(
+        Bias[bias_start + 9] + temp_neuron00 * Weights[weights_start + 14] + temp_neuron01 * Weights[weights_start + 15]
+        + temp_neuron02 * Weights[weights_start + 16] + temp_neuron03 * Weights[weights_start + 17] + temp_neuron04 *
+        Weights[weights_start + 18] + temp_neuron05 * Weights[weights_start + 19] + temp_neuron06 * Weights[
+            weights_start + 20]);
+    const float temp_neuron13 = activation(
+        Bias[bias_start + 10] + temp_neuron00 * Weights[weights_start + 21] + temp_neuron01 * Weights[weights_start +
+            22] + temp_neuron02 * Weights[weights_start + 23] + temp_neuron03 * Weights[weights_start + 24] +
+        temp_neuron04 * Weights[weights_start + 25] + temp_neuron05 * Weights[weights_start + 26] + temp_neuron06 *
+        Weights[weights_start + 27]);
+    const float temp_neuron14 = activation(
+        Bias[bias_start + 11] + temp_neuron00 * Weights[weights_start + 28] + temp_neuron01 * Weights[weights_start +
+            29] + temp_neuron02 * Weights[weights_start + 30] + temp_neuron03 * Weights[weights_start + 31] +
+        temp_neuron04 * Weights[weights_start + 32] + temp_neuron05 * Weights[weights_start + 33] + temp_neuron06 *
+        Weights[weights_start + 34]);
+    const float temp_neuron15 = activation(
+        Bias[bias_start + 12] + temp_neuron00 * Weights[weights_start + 35] + temp_neuron01 * Weights[weights_start +
+            36] + temp_neuron02 * Weights[weights_start + 37] + temp_neuron03 * Weights[weights_start + 38] +
+        temp_neuron04 * Weights[weights_start + 39] + temp_neuron05 * Weights[weights_start + 40] + temp_neuron06 *
+        Weights[weights_start + 41]);
+    const float temp_neuron20 = activation(
+        Bias[bias_start + 13] + temp_neuron10 * Weights[weights_start + 42] + temp_neuron11 * Weights[weights_start +
+            43] + temp_neuron12 * Weights[weights_start + 44] + temp_neuron13 * Weights[weights_start + 45] +
+        temp_neuron14 * Weights[weights_start + 46] + temp_neuron15 * Weights[weights_start + 47]);
+    const float temp_neuron21 = activation(
+        Bias[bias_start + 14] + temp_neuron10 * Weights[weights_start + 48] + temp_neuron11 * Weights[weights_start +
+            49] + temp_neuron12 * Weights[weights_start + 50] + temp_neuron13 * Weights[weights_start + 51] +
+        temp_neuron14 * Weights[weights_start + 52] + temp_neuron15 * Weights[weights_start + 53]);
+    const float temp_neuron22 = activation(
+        Bias[bias_start + 15] + temp_neuron10 * Weights[weights_start + 54] + temp_neuron11 * Weights[weights_start +
+            55] + temp_neuron12 * Weights[weights_start + 56] + temp_neuron13 * Weights[weights_start + 57] +
+        temp_neuron14 * Weights[weights_start + 58] + temp_neuron15 * Weights[weights_start + 59]);
+    const float temp_neuron23 = activation(
+        Bias[bias_start + 16] + temp_neuron10 * Weights[weights_start + 60] + temp_neuron11 * Weights[weights_start +
+            61] + temp_neuron12 * Weights[weights_start + 62] + temp_neuron13 * Weights[weights_start + 63] +
+        temp_neuron14 * Weights[weights_start + 64] + temp_neuron15 * Weights[weights_start + 65]);
+    const float temp_neuron30 = activation(
+        Bias[bias_start + 17] + temp_neuron20 * Weights[weights_start + 66] + temp_neuron21 * Weights[weights_start +
+            67] + temp_neuron22 * Weights[weights_start + 68] + temp_neuron23 * Weights[weights_start + 69]);
+    const float temp_neuron31 = activation(
+        Bias[bias_start + 18] + temp_neuron20 * Weights[weights_start + 70] + temp_neuron21 * Weights[weights_start +
+            71] + temp_neuron22 * Weights[weights_start + 72] + temp_neuron23 * Weights[weights_start + 73]);
+    const float temp_neuron32 = activation(
+        Bias[bias_start + 19] + temp_neuron20 * Weights[weights_start + 74] + temp_neuron21 * Weights[weights_start +
+            75] + temp_neuron22 * Weights[weights_start + 76] + temp_neuron23 * Weights[weights_start + 77]);
+
+    float best = temp_neuron30;
+    uint bestId = 0u;
+
+    if (temp_neuron31 > best)
+    {
+        best = temp_neuron31;
+        bestId = 1;
+    }
+
+    if (temp_neuron32 > best)
+    {
+        bestId = 2;
+    }
+
+    Results[id] = bestId;
+}
