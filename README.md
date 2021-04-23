@@ -14,3 +14,6 @@ Each neuron has a bias value, and each connection between neurons has a weight v
 The first layer represents the inputs, and the last one describes the outputs. In this case, the neuron with the highest value shows the decision the AI made.
 Another critical part of this type of AI is the activation function. I chose "1 / (1 + e⁻ˣ)".
 To know the value of a neuron, the program sums the bias with the values of all neurons in the previous layers multiplied by their respective weights. After that, it applies the activation function.
+
+## Spotboo.Unity.dll
+This is a custom class library that I made to speed up working with Unity. It contains some utility methods (like SaveJson and Screenshot), some extension methods (like Vector3 ToVector4) and some classes that I almost alway use (like Initializer and SoundManager).
