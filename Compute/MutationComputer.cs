@@ -1,5 +1,3 @@
-using Spotboo.Unity.Classes;
-using Spotboo.Unity.Interfaces;
 using UnityEngine;
 
 namespace Compute

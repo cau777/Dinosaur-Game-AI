@@ -1,7 +1,5 @@
-using System.Collections;
+
 using System.Collections.Generic;
-using System.Linq;
-using Spotboo.Unity.Interfaces;
 using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour, IInitializable

@@ -1,15 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Spotboo.Unity.BaseClasses;
 using UnityEngine;
 
-//This class class is used to initialize the scripts in order
-//PreInit()
-//Init()
-//PostInit()
-public class Initializer : InitializatorBase
+public sealed class Initializer : MonoBehaviour
 {
-    void Start()
+    public List<GameObject> preInitObjects;
+    public List<GameObject> normalInitObjects;
+    public List<GameObject> postInitObjects;
+
+    public void StartInitialization()
+    {
+        preInitObjects.ForEach(o => o.GetComponent<IInitializable>().PreInit());
+        normalInitObjects.ForEach(o => o.GetComponent<IInitializable>().Init());
+        postInitObjects.ForEach(o => o.GetComponent<IInitializable>().PostInit());
+    }
+
+    private void Start()
     {
         StartInitialization();
     }
